@@ -226,7 +226,13 @@ $(document).ready(function() {
     	 	$(element).attr("class", "item");
     	 });
     	 
-    	 $(this).attr("class", "item item-active");
+    	 
+    	 var $menu = $(this);
+    	 
+    	 $menu.attr("class", "item item-active");
+    	 //console.log($menu.split('-')[1]);
+    	 
+    	
     
     });
     

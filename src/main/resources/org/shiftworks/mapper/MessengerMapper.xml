@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.shiftworks.mapper.MessengerMapper">
+
+	<resultMap type="org.shiftworks.domain.EmployeeVO"
+		id="empMap">
+		<id property="emp_id" column="emp_id" />
+		<result property="emp_id" column="emp_id" />
+		<result property="dept_id" column="dept_id" />
+		<result property="name" column="name" />
+		<result property="position" column="position" />
+		<result property="birthday" column="birthday" />
+		<result property="address" column="address" />
+		<result property="entry_date" column="entry_date" />
+		<result property="password" column="password" />
+		<collection property="authList" resultMap="deptMap" />
+	</resultMap>
+
+	<resultMap type="org.shiftworks.domain.DepartmentVO"
+		id="deptMap">
+		<result property="dept_id" column="dept_id" />
+		<result property="dept_name" column="dept_name" />
+		<result property="authority" column="authority" />
+	</resultMap>
+
+
+	<!--계정관리 -->
+	<!--전체 list -->
+	<select id="getList"
+		resultType="org.shiftworks.domain.EmployeeVO">
+		SELECT emp_id, dept_name, position, name, entry_date
+			FROM employee e JOIN department d
+				ON e.dept_id = d.dept_id
+			WHERE resignation_date is null
+	</select>
+
+
+</mapper>
