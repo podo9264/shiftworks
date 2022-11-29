@@ -27,7 +27,7 @@
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 
-						<form role="form" action="/manager/modify" method="post">
+						<form role="form" action="/myaccount/info/change" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" /> 
 								<input type='hidden' name='pageNum'

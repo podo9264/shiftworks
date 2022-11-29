@@ -27,7 +27,7 @@
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 
-				<form role="form" action="/manager/register" method="post">
+				<form role="form" action="/manager/new" method="post">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="form-group">

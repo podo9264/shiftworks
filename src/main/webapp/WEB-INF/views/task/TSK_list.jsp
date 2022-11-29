@@ -37,9 +37,9 @@
 							data-bs-toggle="dropdown" aria-expanded="false" value="T">
 							제목</button>
 						<ul class="dropdown-menu typeList">
-							<li><a class="dropdown-item type" href="T">제목</a></li>
-							<li><a class="dropdown-item type" href="C">내용</a></li>
-							<li><a class="dropdown-item type" href="W">작성자</a></li>
+							<li><a class="dropdown-item type" href="t">제목</a></li>
+							<li><a class="dropdown-item type" href="c">내용</a></li>
+							<li><a class="dropdown-item type" href="w">작성자</a></li>
 						</ul>
 						<form class="d-flex" role="search">
 						<input id="searchForm" class="form-control me-2" type="search"

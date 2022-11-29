@@ -24,7 +24,7 @@
 <body>
 <div class = "container">
 <h2>결재문서 작성</h2>
-   <form id="insertForm" role="form" action="/approval/insert" method="post"> 
+   <form id="insertForm" role="form" action="/approval/new" method="post"> 
           <div class=""></div>
              <div>
                 <label>결재 양식</label> 
@@ -165,7 +165,7 @@
                      };
                
                $.ajax({
-                  url:"/approval/temporal",
+                  url:"/approval/temporory",
                   type:'post',
                   data: JSON.stringify(post),
                   beforeSend : function(xhr){
@@ -191,7 +191,7 @@
               e.preventDefault();
               
               $.ajax({
-                 url:"/approval/tempList?emp_id=" + form.find('input[name="emp_id"]').val(),
+                 url:"/approval/temporory?emp_id=" + form.find('input[name="emp_id"]').val(),
                  type: 'get',
                  success:function(result){
                     console.log(result)
@@ -204,7 +204,7 @@
                     body.append("<ul>")
                     $.each(result, function(index, item){
                        console.log(item)
-                       var str = '<li><a href="/approval/tempSelect/' +item.temp_id +'" class="tempBtn">' +                    
+                       var str = '<li><a href="/approval/temporory/' +item.temp_id +'" class="tempBtn">' +                    
                         item.temp_title + '</a></li>';
                        body.append(str);
                     })

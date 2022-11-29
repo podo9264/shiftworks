@@ -27,7 +27,7 @@
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 
-						<form role="form" action="/manager/modify" method="post">
+						<form role="form" action="/manager/'<c:out value="${employee.emp_id }"/>'" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" /> 
 								<input type='hidden' name='pageNum'
@@ -115,6 +115,8 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	var emp_id = '<c:out value="${employee.emp_id }"/>';
 
 	var formObj = $("form");
 
@@ -128,7 +130,7 @@ $(document).ready(function() {
 	    
 	    if(operation === 'remove'){
 	    	
-			formObj.attr("action", "/manager/remove");
+			formObj.attr("action", "/manager/removal/" + emp_id);
 			
 	    } else if(operation === 'list'){
 	      

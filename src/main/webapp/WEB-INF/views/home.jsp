@@ -21,7 +21,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     $(function () {
         var request = $.ajax({
-            url: "/booking/cal2.json",
+            url: "/booking/calendar.json",
             method: "GET"
         });
         

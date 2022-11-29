@@ -17,10 +17,10 @@
 			  <div class="row">
 			    <div class="col">결재문서작성
 			    	<div class="list-group list-group-flush">
-			    		  	<a href="/approval/insert" class="list-group-item ">기안서 작성	</a>		    		  	
-			    		  	<a href="/approval/insert" class="list-group-item ">품의서 작성</a>
-			    		  	<a href="/approval/insert" class="list-group-item ">휴가신청서 작성</a>
-			    		  	<a id="load" href="/approval/temporal" class="list-group-item ">임시저장 목록 불러오기</a>
+			    		  	<a href="/approval/new" class="list-group-item ">기안서 작성	</a>		    		  	
+			    		  	<a href="/approval/new" class="list-group-item ">품의서 작성</a>
+			    		  	<a href="/approval/new" class="list-group-item ">휴가신청서 작성</a>
+			    		  	<a id="load" href="/approval/temporory" class="list-group-item ">임시저장 목록 불러오기</a>
 			    	</div>
 			    </div>
 			    <!-- end of 결재문서작성  -->
@@ -48,7 +48,8 @@
 			  <div class="row" id ="row2">
 			    <div class="col">결재할 문서
 			    	<div class="list-group">
-	  					<a href="/approval/get" class="list-group-item" aria-current="true">
+			    		<!-- approval 뒤의 apr_id 불러오는 형태로 수정 필요 -->
+	  					<a href="/approval/1" class="list-group-item" aria-current="true">
 	   						 <div class="d-flex w-100 justify-content-between">
 	     						 <h5 class="mb-1" >휴가 신청서</h5>
 	     							 <small>대기중</small>
@@ -159,7 +160,7 @@
            e.preventDefault();
            
            $.ajax({
-              url:"/approval/tempList?emp_id=user1", //emp_id 추후 수정
+              url:"/approval/temporory?emp_id=user1", //emp_id 추후 수정
               type: 'get',
               success:function(result){
                  console.log(result)
@@ -172,7 +173,7 @@
                  body.append("<ul>")
                  $.each(result, function(index, item){
                     console.log(item)
-                    var str = '<li><a href="/approval/tempSelect/' +item.temp_id +'" class="tempBtn">' +                    
+                    var str = '<li><a href="/approval/temporory/' +item.temp_id +'" class="tempBtn">' +                    
                      item.temp_title + '</a></li>';
                     body.append(str);
                  })

@@ -36,7 +36,7 @@ public class MyAccountController {
 	private BCryptPasswordEncoder pwdEncoder;
 	
 
-	@GetMapping({"/get","/modify"})
+	@GetMapping("/info")
 	@PreAuthorize("isAuthenticated()")
 	public ModelAndView get(Authentication auth) {
 		UserDetails ud = (UserDetails)auth.getPrincipal();
@@ -46,7 +46,25 @@ public class MyAccountController {
 		EmployeeVO myInfo = service.get(emp_id);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("myaccount/get");
+		mav.setViewName("/myaccount/MGT_get");
+		mav.addObject("employee", myInfo);
+		log.info(myInfo);
+		
+		return mav;
+		
+	}
+	
+	@GetMapping("/info/change")
+	@PreAuthorize("isAuthenticated()")
+	public ModelAndView modify(Authentication auth) {
+		UserDetails ud = (UserDetails)auth.getPrincipal();
+		log.info(ud.getUsername());
+		String emp_id = ud.getUsername();	
+		
+		EmployeeVO myInfo = service.get(emp_id);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("/myaccount/MGT_modify");
 		mav.addObject("employee", myInfo);
 		log.info(myInfo);
 		
@@ -55,7 +73,7 @@ public class MyAccountController {
 	}
 	
 	
-	@PostMapping("/modify")
+	@PostMapping("/info/change")
 	@PreAuthorize("isAuthenticated()")
 	public String modify(EmployeeVO empVO, RedirectAttributes rttr) {
 		String inputPass=empVO.getPassword();
@@ -66,7 +84,7 @@ public class MyAccountController {
 			rttr.addFlashAttribute("modifyResult", "success");
 		}
 
-		return "redirect:/myaccount/get";
+		return "redirect:/myaccount/info";
 	}
 	
 

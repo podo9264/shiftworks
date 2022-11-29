@@ -168,7 +168,7 @@
 																					"href")
 																	+ "'>");
 													actionForm.attr("action",
-															"/manager/get");
+															"/manager/info/" + $(this).attr("href"));
 													actionForm.submit();
 
 												});

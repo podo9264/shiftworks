@@ -337,11 +337,11 @@ $(document).ready(function(){
         // 일주일마다 테이블 로우를 새로 만들 수 있도록 count
         var dayCount;
         // 각 주마다 넘버링 할 수 있도록 count
-        var weekCount;
+        var weekCount = 0;
         dayCount = 0;
         weekCount = 0;
         makeCalendar = "";
-        makeCalendar = '<tr class="week0">';
+        makeCalendar = '<tr class="week' + weekCount + '">';
         // 근무자 확인 아이콘 생성을 위한 html 태그
         var workers = '<a id="workers" tabindex="0" class="btn"'
                     + 'data-bs-toggle="popover"' + 'data-bs-title="workerList"'
@@ -383,7 +383,7 @@ $(document).ready(function(){
         // 이번달 날짜만큼 칸 생성
         for (var i = 1; i <= nextDate; i++) {
             if(dayCount == 7) {
-                makeCalendar += '</tr><tr class="week'+ weekCount +'">'
+                makeCalendar += '</tr><tr class="week'+ ++weekCount +'">'
                 dayCount = 0;
             }
             dayCount++;

@@ -39,32 +39,8 @@ public class BookingController {
 	
 	private BookingService service;
 	
-	
-	//getList 테스트 메서드(jsonArray 테스트)
-	@GetMapping("/cal3")
-	@PreAuthorize("isAuthenticated()")
-	public String listTojsonArray() {
-		List<BookingVO> bookingList = service.getList();
-		
-		JsonArray jsonArr = new JsonArray();
-		JsonObject obj = new JsonObject();
-		
-		for(int i=0;i<bookingList.size();i++) {
-			obj.addProperty("title", bookingList.get(i).getBook_title());
-			obj.addProperty("start", bookingList.get(i).getBook_date());
-			
-			jsonArr.add(obj);
-		}
-		
-		log.info("jsonArr 형태----------------------------->"+jsonArr);
-		return jsonArr.toString();
-	}
-	
-	
-	
-	
 	//getList 테스트 메서드(list만 가져오고 view없음) -> 리스트 출력은 ok, 달력에 출력은 x
-	@GetMapping("/cal2")
+	@GetMapping("/calendar")
 	@PreAuthorize("isAuthenticated()")
 	public List<Map<String, Object>> getCalbookings() {
 		List<BookingVO> bookingList = service.getList();
@@ -92,9 +68,8 @@ public class BookingController {
 		return calList;
 	}
 	
-	
 	//calendar test method -> calendar view 출력용(list 못가져옴)
-	@GetMapping("/cal")
+	@GetMapping("/calendar/view")
 	@PreAuthorize("isAuthenticated()")
 	public ModelAndView getCalList() {
 		ModelAndView mav = new ModelAndView();
@@ -113,59 +88,6 @@ public class BookingController {
 
 		return mav;
 	}
-	
-	
-	//예약1개 보기 테스트 메서드(booking만 반환, view없음) -> 달력 출력ok
-	@GetMapping("/getCal")
-	@PreAuthorize("isAuthenticated()")
-	public Map<String, Object> getCal() {
-		BookingVO getOne = service.getBooking(1);
-		
-//		String bookdate = getOne.getBook_date();
-//		log.info(bookdate); //10개
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("title", getOne.getBook_title());
-		map.put("start", getOne.getBook_date());
-		
-		return map;
-		
-		
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("booking/bookingList");
-//		mav.addObject("event", service.getList());
-		
-//		JsonObject jsonObj = new JsonObject();
-//		JsonArray jsonArr = new JsonArray();
-//		
-//		HashMap<String, Object> hash = new HashMap<String, Object>();
-//		
-//		for(int i=0; i<list.size();i++) {
-//			hash.put("title", list.get(i).getBook_title());
-//			hash.put("start", list.get(i).getBook_date());
-//
-//			jsonObj = new JsonObject(hash);
-//			jsonArr.add(jsonObj);
-//		}
-//		log.info("jsonArr: "+jsonArr);
-		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		for(int i=0;i<list.size();i++) {
-//			map.put("title", list.get(i).getBook_title());
-//			map.put("start", list.get(i).getBook_date());
-//		}
-//		
-//		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
-//		resultList.add(null);
-		
-		//return map;
-	}
-	
-	
-	
-	
-	
-	
 	
 	//예약폼 페이지로 이동
 	@GetMapping("/new")

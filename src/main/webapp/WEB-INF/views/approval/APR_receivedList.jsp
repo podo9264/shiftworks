@@ -111,7 +111,7 @@
 							e.preventDefault();
 							actionForm.append("<input type='hidden' name='apr_id' value='"
 											+ $(this).attr("href")+ "'>");
-							actionForm.attr("action","/approval/get");
+							actionForm.attr("action","/approval/" + $(this).attr("href"));
 							actionForm.submit();
 						});
 

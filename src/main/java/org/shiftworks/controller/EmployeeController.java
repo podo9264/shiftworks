@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,37 +33,38 @@ public class EmployeeController {
 	
 	@GetMapping("/list")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public void list(AccountCriteria cri, Model model) {
+	public String list(AccountCriteria cri, Model model) {
 		model.addAttribute("list", service.getList(cri));
 		
 		int total = service.getTotal(cri);
 		log.info("total: " + total);
 		model.addAttribute("pageMaker", new AccountPageDTO(cri, total));
 		
-		log.info("list11.............."+model);
+		return "/manager/MGR_list";
 		
 	}
 	
-	@GetMapping("/retireelist")
+	@GetMapping("/retiree-list")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public void retireeList(AccountCriteria cri, Model model) {
+	public String retireeList(AccountCriteria cri, Model model) {
 		model.addAttribute("list", service.getRetireeList(cri));
-		
+		log.info(service.getRetireeList(cri));
 		int total = service.getTotalRetiree(cri);
-		log.info("total: " + total);
+		log.info("retiree_total: " + total);
 		model.addAttribute("pageMaker", new AccountPageDTO(cri, total));
 		
-		log.info("list11.............."+model);
+		return "/manager/MGR_retireeList";
 		
 	}
 
-	@GetMapping("/register")
+	@GetMapping("/new")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public void register() {
+	public String register() {
 		
+		return "/manager/MGR_new";
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/new")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String register(EmployeeVO empVO, RedirectAttributes rttr){
 		log.info("==========================");
@@ -72,26 +74,36 @@ public class EmployeeController {
 		empVO.setPassword(pwd);
 		
 		log.info("ready register......................");
-		service.register(empVO);
-		log.info("register..............1" + empVO);
 		rttr.addFlashAttribute("result", empVO.getEmp_id());
 		
 		return "redirect:/manager/list";
 		
 	}
 	
-	
-	@GetMapping({"/get", "/modify"})
+	// 상세보기
+	@GetMapping("/info/{emp_id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public void get(@RequestParam("emp_id") String emp_id, @ModelAttribute("cri") AccountCriteria cri, Model model) {
+	public String get(@PathVariable("emp_id") String emp_id, @ModelAttribute("cri") AccountCriteria cri, Model model) {
 		log.info("get..............");
-		model.addAttribute("employee", service.get(emp_id));		
+		model.addAttribute("employee", service.get(emp_id));	
+		
+		return "/manager/MGR_get";
 	}
 	
-	
-	@PostMapping("/modify")
+	// 수정을 위한 폼 이동
+	@GetMapping("/{emp_id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String modify(EmployeeVO empVO, @ModelAttribute("cri") AccountCriteria cri,
+	public String modify(@PathVariable("emp_id") String emp_id, @ModelAttribute("cri") AccountCriteria cri, Model model) {
+		log.info("get..............");
+		model.addAttribute("employee", service.get(emp_id));	
+		
+		return "/manager/MGR_modify";
+	}
+	
+	// 수정
+	@PostMapping("/{emp_id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String modify(@PathVariable("emp_id") String emp_id, EmployeeVO empVO, @ModelAttribute("cri") AccountCriteria cri,
 				RedirectAttributes rttr) {
 		String inputPass=empVO.getPassword();
 		String pwd=pwdEncoder.encode(inputPass);
@@ -107,11 +119,10 @@ public class EmployeeController {
 		return "redirect:/manager/list";
 	}
 	
-	@PostMapping("/remove")
+	@PostMapping("/removal/{emp_id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String remove(@RequestParam("emp_id") String emp_id, 
 			@ModelAttribute AccountCriteria cri, RedirectAttributes rttr) {
-		log.info("remove............."+emp_id);
 		if(service.remove(emp_id)) {
 			rttr.addAttribute("result", "success");
 		}		

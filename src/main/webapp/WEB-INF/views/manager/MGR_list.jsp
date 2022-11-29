@@ -183,7 +183,7 @@
 
 						$("#regBtn").on("click", function() {
 
-							self.location = "/manager/register";
+							self.location = "/manager/new";
 
 						});
 						
@@ -213,7 +213,7 @@
 																	"href")
 															+ "'>");
 											actionForm.attr("action",
-													"/manager/get");
+													"/manager/info/" + $(this).attr("href"));
 											actionForm.submit();
 
 										});

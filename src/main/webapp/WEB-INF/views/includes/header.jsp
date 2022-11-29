@@ -19,7 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
 <!-- Custom CSS -->
-<link href="/resources/css/headerCSS.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet">
 
 <script type="text/javascript" src="/resources/js/post.js"></script>
 
@@ -84,7 +84,7 @@
 							<ul>
 								<a href="/messenger/chat" onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;"><li>메신저</li></a> <br>
 								<!-- <a href="/messenger"><li>메신저</li></a><br> -->
-								<a href="/myaccount/get"><li>나의 계정 관리</li></a> <br>
+								<a href="/myaccount/info"><li>나의 계정 관리</li></a> <br>
 								<a href="/myaccount/orgchart"><li>조직도 보기</li></a> <br>
 								<a href="/customLogout"><li>로그아웃</li></a> <br>
 							</ul>
@@ -121,11 +121,11 @@
 						<div class="card card-body"
 							style="height: 130px; border-width: 0;">
 							<ul>
-								<a href="/manager/register"><li>계정 생성</li></a> <br>
+								<a href="/manager/new"><li>계정 생성</li></a> <br>
 								<a href="/manager/list"><li>계정 관리</li></a> <br>
 								<!-- <a href="/account/form"><li>계정 양식 설정</li></a><br> -->
 								<!-- <a href="/account/{empid}"><li>계정 삭제</li></a><br> -->
-								<a href="/manager/retireelist"><li>퇴사자 리스트 관리</li></a> <br>
+								<a href="/manager/retiree-list"><li>퇴사자 리스트 관리</li></a> <br>
 							</ul>
 						</div>
 					</div>
@@ -190,7 +190,7 @@
 						<div class="card card-body"
 							style="height: 130px; border-width: 0;">
 							<ul>
-								<a href="/approval/insert"><li>결재 문서 작성</li></a><br>
+								<a href="/approval/new"><li>결재 문서 작성</li></a><br>
 								<a href="/approval/list"><li>전체 결재문서함</li></a><br>
 								<a href="/approval/receivedList"><li>결재전 문서</li></a><br>
 							</ul>
@@ -283,7 +283,7 @@
 								<div class="card card-body"
 									style="height: 100px; border-width: 0;">
 									<ul>
-										<a href="/booking/cal" class="btmmenu"><li>월별 예약 현황</li></a> <br>
+										<a href="/booking/calendar/view" class="btmmenu"><li>월별 예약 현황</li></a> <br>
 										<a href="/booking/new"><li>예약하기</li></a> <br>
 										<a href="/booking/list"><li>전체 예약보기</li></a> <br>
 									</ul>

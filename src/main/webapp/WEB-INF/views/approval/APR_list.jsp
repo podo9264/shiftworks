@@ -25,7 +25,7 @@
 <div class = "container">
 	<h2>전체 결재 문서 목록</h2>
 	<a class = "btn btn-default" href="/approval/main" role="button">메인</a>
-	<a class = "btn btn-default" href="/approval/insert" role="button">결재문서작성</a>
+	<a class = "btn btn-default" href="/approval/new" role="button">결재문서작성</a>
 	<a class ="btn btn-default" href="/approval/receivedList" role ="button">결재할 문서함</a>
 
 	<table class="table table-hover" >
@@ -116,7 +116,7 @@
 					e.preventDefault();
 					actionForm.append("<input type='hidden' name='apr_id' value='"
 							+ $(this).attr("href") + "'>");
-					actionForm.attr("action", "/approval/get");
+					actionForm.attr("action", "/approval/" + + $(this).attr("href"));
 					actionForm.submit();
 				});
 	</script>
